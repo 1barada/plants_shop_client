@@ -1,7 +1,8 @@
-import { useState, SyntheticEvent, useEffect } from "react";
+import { useState, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ILoginRequestData from "../../../models/ILoginRequestData";
-import { UserSliceType, login } from "../../../store/slices/userSlice";
+import login from "../../../store/slices/userSlice/thunk/login";
+import { UserSliceType } from "../../../store/slices/userSlice/userSlice";
 import { RootState } from "../../../store/store";
 import Errors from "../../commonComponents/Errors/Errors";
 import Loading from "../../commonComponents/Loading/Loading";
@@ -13,11 +14,6 @@ const LoginForm = () => {
 
     const dispatch = useDispatch<any>();
     const user = useSelector<RootState>(state => state.user) as UserSliceType;
-    const store = useSelector<RootState>(state => state);
-
-    useEffect(() => {
-        console.log(store);
-    }, [store]);
 
     const submitHendler = (e: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
         e.preventDefault();

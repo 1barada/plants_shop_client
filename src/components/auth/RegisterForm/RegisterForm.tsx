@@ -1,6 +1,7 @@
 import { useState, SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UserSliceType, register } from '../../../store/slices/userSlice';
+import register from '../../../store/slices/userSlice/thunk/register';
+import { UserSliceType } from '../../../store/slices/userSlice/userSlice';
 import { RootState } from '../../../store/store';
 import Errors from '../../commonComponents/Errors/Errors';
 import Loading from '../../commonComponents/Loading/Loading';

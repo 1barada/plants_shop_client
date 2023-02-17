@@ -1,8 +1,11 @@
+import IProduct from "./IProduct";
+
 export default interface IUser {
-    username: string,
+    name: string,
     token: string,
     role: string,
     balance: number,
-    purchases: string[],
-	shoppingCart: string[]
+    imgUrl?: string,
+    purchases: IProduct[],
+	shoppingCart: IProduct[]
 };

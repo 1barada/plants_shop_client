@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from './rootReducer';
-import { initialState as userInitialState } from "./slices/userSlice";
+import { initialState as userInitialState } from "./slices/userSlice/userSlice";
 
 const userText = localStorage.getItem('user');
 const preloadedData = userText ? JSON.parse(userText) : userInitialState;

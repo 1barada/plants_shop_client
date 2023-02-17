@@ -2,16 +2,16 @@ import { MouseEvent } from "react";
 import { Link } from "react-router-dom";
 import { noImageUrl } from "../../../config";
 import IProduct from "../../../models/IProduct";
-import styles from './ProductItem.module.css';
+import styles from './ProductListItem.module.css';
 
-const ProductItem = ({product}: {product: IProduct}) => {
+const ProductGridItem = ({product}: {product: IProduct}) => {
     const addToCard = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
     }
 
     return (
-        <Link to='' className={styles.productItem}>
+        <Link to='' className={styles.ProductGridItem}>
             <div className={styles.icon}>
                 <img
                     src={product.imageUrl ? product.imageUrl : ''}
@@ -36,4 +36,4 @@ const ProductItem = ({product}: {product: IProduct}) => {
     );
 }
  
-export default ProductItem;
+export default ProductGridItem;

@@ -1,29 +1,63 @@
 .profile {
-    display: flex;
-    flex-direction: column;
+    min-height: calc(100vh - var(--header-height));
+    display: grid;
+    grid-template: 1fr / 1fr 4fr;
 }
 
 .profile > div {
     flex: 0 0 auto;
 }
 
-.profile__info {
+.profile__user {
     height: 200px;
-    background-color: antiquewhite;
+    display: flex;
 }
 
 .profile__menu {
     height: 400px;
-    background-color: rebeccapurple;
+    padding: 20px 0;
+    font-size: 22px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--main-border-color);
+}
+
+.menu__option {
+    padding: 5px 5px;
+}
+
+.menu__option:hover {
+    background-color: rgb(250, 250, 250);
+    cursor: pointer;
+}
+
+.menu__option-selected {
+    background-color: rgb(240, 240, 240);
+}
+
+.menu__option-selected:hover {
+    background-color: rgb(240, 240, 240);
 }
 
 .profile__avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.75),
+        rgba(255, 255, 255, 0.75)
+      ),var(--profile-bg-image);
+    background-size: cover;
+    background-position-y: -40px;
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 2px solid var(--main-border-color);
 }
 
-.profile-info__avatar {
-    width: 50px;
-    height: 50px;
+.profile__avatar > img {
+}
+
+.profile__body {
 }

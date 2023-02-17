@@ -1,0 +1,77 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    border-radius: var(--main-border-radius);
+    border: 1px solid var(--main-border-color);
+}
+
+.icon {
+    width: 100%;
+    height: var(--card-image-width);
+    margin-bottom: 10px;
+}
+
+.icon>img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.body {
+    padding: 0 10px;
+    flex: 0 0 71.5px;
+}
+
+.title {
+    font-size: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.description {
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.4;
+}
+
+.footer {
+    margin: 14px 0 5px; 
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.price {
+    padding-left: 10px;
+}
+
+.price>span {
+    margin-left: 3px;
+    color: #3EA54C;
+}
+
+.addToCardBtn {
+    box-sizing: border-box;
+    user-select: none;
+    padding: 0.5em;
+    border-radius: var(--static6);
+    background-color: rgb(245, 245, 245);
+    cursor: pointer;
+}
+
+.addToCardBtn:hover {
+    border: 0.2em solid rgba(206, 194, 203, 0.3);
+    padding: 0.3em;
+}

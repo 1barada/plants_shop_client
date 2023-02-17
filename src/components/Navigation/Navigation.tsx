@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout, UserSliceType } from '../../store/slices/userSlice';
+import { logout, UserSliceType } from '../../store/slices/userSlice/userSlice';
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
