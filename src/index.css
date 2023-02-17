@@ -1,0 +1,135 @@
+*,
+*::before,
+*::after {
+
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    min-height: 100% !important;
+    height: 100%;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+    padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+article>*+* {
+    margin-top: 1em;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+
+:root {
+    /*Colors*/
+    --main-color: white;
+    --header-bg-color: #cadba4;
+
+    /*Sizes*/
+    --static1: 1px;
+    --static2: 2px;
+    --static4: 4px;
+    --static6: 6px;
+    --static8: 8px;
+    --static12: 12px;
+    --static16: 16px;
+    --static20: 20px;
+    --static24: 24px;
+    --static32: 32px;
+    --static48: 48px;
+    --static64: 64px;
+
+    --header-height: 60px;
+    --container-width: 1300px;
+    --card-image-width: 140px;
+    --main-border-radius: 3px;
+    --ui-button-color-hover: #ebe0e4;
+    --main-border-color: hsl(210,8%,85%);
+    --link-hover-color: rgb(250, 250, 250);
+}
+
+#root {
+    font-family: 'Johnston', sans-serif;
+    font-weight: 400;
+    height: 100%;
+    max-width: 100vw;
+    background-color: var(--main-color);
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding-top: var(--header-height);
+}

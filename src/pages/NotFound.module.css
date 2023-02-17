@@ -1,0 +1,22 @@
+.notfound {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.link {
+    height: 34px;
+    margin-top: 30px;
+    color: inherit;
+    background-color: rgb(252, 247, 240);
+    border: 1px solid gray;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.link:hover {
+    background-color: rgb(244, 238, 230);
+}
