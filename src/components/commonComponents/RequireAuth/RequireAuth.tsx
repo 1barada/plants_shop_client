@@ -6,9 +6,9 @@ interface RequireAuthProps {
 };
 
 const RequireAuth = ({children}: RequireAuthProps) => {
-    const isAuth = useAuth();
+    const isAuthorized = useAuth();
 
-    if (!isAuth) {
+    if (!isAuthorized) {
         return (
             <Navigate to='/'/>
         );

@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import ISearchInfo from '../../../models/ISearchInfo';
-import searchProducts from '../../../store/slices/productSlice/thunk/functions/searchProducts';
+import searchProducts from '../../../store/slices/productSlice/thunk/searchProducts';
 import { AppDispatch } from '../../../store/store';
 import styles from './SearchProductForm.module.css';
 

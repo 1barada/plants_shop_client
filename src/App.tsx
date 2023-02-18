@@ -20,7 +20,7 @@ const App: React.FunctionComponent = () => {
                         <AdminPage/>
                     </RequireAuth>} 
                 />
-                <Route path='/profile' element={
+                <Route path='/profile/*' element={
                     <RequireAuth>
                         <ProfilePage />
                     </RequireAuth>} 

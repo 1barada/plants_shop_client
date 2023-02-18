@@ -1,7 +1,5 @@
 .list {
-    padding: 16px;
     color: black;
     display: flex;
     flex-direction: column;
-    gap: 16px;
 }

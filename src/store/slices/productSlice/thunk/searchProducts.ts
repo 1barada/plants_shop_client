@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { searchProdcutsRequest } from "../../../../../api/product";
-import ISearchInfo from "../../../../../models/ISearchInfo";
+import { searchProdcutsRequest } from "../../../../api/product";
+import ISearchInfo from "../../../../models/ISearchInfo";
 
 export default createAsyncThunk(
     'products/searchProductsStatus/',

@@ -3,10 +3,12 @@ import IError from "../../../models/IError";
 import IProduct from "../../../models/IProduct";
 import IRejectedResponse from "../../../models/IRejectedResponse";
 import IUser from "../../../models/IUser";
+import addToShoppingCart from "./thunk/addToShoppingCart";
 import getPurchases from "./thunk/getPurchases";
 import getShoppingCart from "./thunk/getShoppingCart";
 import login from "./thunk/login";
 import register from "./thunk/register";
+import removeFromShoppingCartAndThenGet from "./thunk/removeFromShoppingCartAndThenGet";
 
 export type UserSliceType = ReturnType<typeof userSlice.reducer>;
 
@@ -72,6 +74,7 @@ export const userSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(getShoppingCart.rejected, (state, action) => {
+            console.log(action)
             const payload = action.payload as IRejectedResponse;
             console.error(payload)
             state.errors = payload.errors;
@@ -89,6 +92,40 @@ export const userSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(getPurchases.rejected, (state, action) => {
+            const payload = action.payload as IRejectedResponse;
+            console.error(payload)
+            state.errors = payload.errors;
+            state.loading = false;
+        });
+
+
+
+        builder.addCase(addToShoppingCart.pending, (state, action) => {
+            state.errors = [] as IError[];
+            state.loading = true;
+        });
+        builder.addCase(addToShoppingCart.fulfilled, (state, {payload}: {payload: IProduct[]}) => {
+            state.info.shoppingCart = payload;
+            state.loading = false;
+        });
+        builder.addCase(addToShoppingCart.rejected, (state, action) => {
+            const payload = action.payload as IRejectedResponse;
+            console.error(payload)
+            state.errors = payload.errors;
+            state.loading = false;
+        });
+
+
+
+        builder.addCase(removeFromShoppingCartAndThenGet.pending, (state, action) => {
+            state.errors = [] as IError[];
+            state.loading = true;
+        });
+        builder.addCase(removeFromShoppingCartAndThenGet.fulfilled, (state, {payload}: {payload: IProduct[]}) => {
+            state.info.shoppingCart = payload;
+            state.loading = false;
+        });
+        builder.addCase(removeFromShoppingCartAndThenGet.rejected, (state, action) => {
             const payload = action.payload as IRejectedResponse;
             console.error(payload)
             state.errors = payload.errors;

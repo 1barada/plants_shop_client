@@ -17,7 +17,7 @@ export const createProductRequest = async (product: IProduct, user: IUser) => {
         baseServerURL + '/product',
         product, {
             headers: {
-                Authorization: `${user.token}`
+                Authorization: `Bearer ${user.token}`
             }
         }
     );

@@ -1,13 +1,20 @@
 import { MouseEvent } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { noImageUrl } from "../../../config";
 import IProduct from "../../../models/IProduct";
+import fetchProducts from "../../../store/slices/productSlice/thunk/fetchProducts";
+import addToShoppingCart from "../../../store/slices/userSlice/thunk/addToShoppingCart";
+import { AppDispatch } from "../../../store/store";
 import styles from './ProductGridItem.module.css';
 
 const ProductGridItem = ({product}: {product: IProduct}) => {
+    const dispatch = useDispatch<AppDispatch>();
+
     const addToCard = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
+        dispatch(addToShoppingCart(product)).then(e => dispatch(fetchProducts()));
     }
 
     return (
@@ -30,7 +37,10 @@ const ProductGridItem = ({product}: {product: IProduct}) => {
             </div>
             <div className={styles.footer}>
                 <div className={styles.price}><span>{product.price}$</span></div>
-                <div onClick={addToCard} className={styles.addToCardBtn}>Add to card</div>
+                {product.isInShoopingCart 
+                    ?   <h4 className={styles.isInCard}>already in cart</h4>
+                    :   <div onClick={addToCard} className={styles.addToCardBtn}>Add to card</div>
+                }
             </div>
         </Link>
     );

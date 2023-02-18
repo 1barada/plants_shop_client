@@ -7,8 +7,8 @@ export default createAsyncThunk(
     'user/getProfileShoppingCartStatus/',
     async (_, thunkApi) => {
         try {
-            const user = (thunkApi.getState() as any).user as IUser;
-            console.log(user)
+            const user = (thunkApi.getState() as any).user.info as IUser;
+            
             if (!user.token) {
                 return thunkApi.rejectWithValue({
                     errors: [
@@ -23,6 +23,7 @@ export default createAsyncThunk(
 
             return response.data;
         } catch (error: any) {
+            console.log(error)
             return thunkApi.rejectWithValue(error.response.data);
         }
     }

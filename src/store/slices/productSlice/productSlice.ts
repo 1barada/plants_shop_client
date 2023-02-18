@@ -1,8 +1,10 @@
-import { createReducer, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import IProduct from "../../../models/IProduct";
 import IError from "../../../models/IError";
 import IRejectedResponse from "../../../models/IRejectedResponse";
-import {addProduct, fetchProducts, seachProducts} from "./thunk/index";
+import fetchProducts from "./thunk/fetchProducts";
+import addProduct from "./thunk/addProduct";
+import seachProducts from "./thunk/searchProducts";
 
 export type ProductsSliceType = ReturnType<typeof productSlice.reducer>;
 
@@ -24,7 +26,16 @@ const productSlice = createSlice({
             state.errors = [];
         });
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
-            state.items = action.payload;
+            const {products, shoopingCartIds} = action.payload;
+            products.forEach(product => {
+                if (shoopingCartIds.includes(product.id)) {
+                    product.isInShoopingCart = true;
+                    shoopingCartIds.splice(shoopingCartIds.indexOf(product.id), 1);
+                } else {
+                    product.isInShoopingCart = false;
+                }
+            });
+            state.items = products;
             state.loading = false;
         });
         builder.addCase(fetchProducts.rejected, (state, action) => {
@@ -81,7 +92,5 @@ const productSlice = createSlice({
         });
     }
 });
-
-console.error('you finished here: createReducer', createReducer)
 
 export default productSlice.reducer; 

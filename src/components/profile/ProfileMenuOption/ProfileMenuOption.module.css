@@ -1,0 +1,16 @@
+.menu__option {
+    padding: 5px 5px;
+}
+
+.menu__option:hover {
+    background-color: rgb(250, 250, 250);
+    cursor: pointer;
+}
+
+.menu__option-selected {
+    background-color: rgb(240, 240, 240);
+}
+
+.menu__option-selected:hover {
+    background-color: rgb(240, 240, 240);
+}

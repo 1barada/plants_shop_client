@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import IError from "../../../models/IError";
 import IProduct from "../../../models/IProduct";
 import { ProductsSliceType } from "../../../store/slices/productSlice/productSlice";
-import addProduct from "../../../store/slices/productSlice/thunk/functions/addProduct";
+import addProduct from "../../../store/slices/productSlice/thunk/addProduct";
 import { AppDispatch } from "../../../store/store";
 import styles from './CreateProductForm.module.css';
 

@@ -1,14 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getPurchasesRequest } from "../../../../api/profile";
+import { addToShoppingCartRequest } from "../../../../api/profile";
 import IError from "../../../../models/IError";
+import IProduct from "../../../../models/IProduct";
 import IUser from "../../../../models/IUser";
 
 export default createAsyncThunk(
-    'user/getProfilePurchasesStatus/',
-    async (_, thunkApi) => {
+    'user/addToProfileShoppingCartStatus/',
+    async (product: IProduct, thunkApi) => {
         try {
             const user = (thunkApi.getState() as any).user.info as IUser;
-            
+
             if (!user.token) {
                 return thunkApi.rejectWithValue({
                     errors: [
@@ -19,10 +20,11 @@ export default createAsyncThunk(
                     ] as IError[]
                 });
             }
-            const response = await getPurchasesRequest(user);
+            const response = await addToShoppingCartRequest(user, product.id);
 
             return response.data;
         } catch (error: any) {
+            console.log(error)
             return thunkApi.rejectWithValue(error.response.data);
         }
     }
