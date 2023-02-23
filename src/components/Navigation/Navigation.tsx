@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout, UserSliceType } from '../../store/slices/userSlice/userSlice';
@@ -38,4 +38,4 @@ const Navigation = () => {
     );
 }
  
-export default Navigation;
+export default memo(Navigation);

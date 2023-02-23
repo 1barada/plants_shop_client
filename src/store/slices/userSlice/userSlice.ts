@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import IError from "../../../models/IError";
 import IProduct from "../../../models/IProduct";
+import IQuantity from "../../../models/IQuantity";
 import IRejectedResponse from "../../../models/IRejectedResponse";
 import IUser from "../../../models/IUser";
-import addToShoppingCart from "./thunk/addToShoppingCart";
 import getPurchases from "./thunk/getPurchases";
-import getShoppingCart from "./thunk/getShoppingCart";
 import login from "./thunk/login";
 import register from "./thunk/register";
-import removeFromShoppingCartAndThenGet from "./thunk/removeFromShoppingCartAndThenGet";
 
 export type UserSliceType = ReturnType<typeof userSlice.reducer>;
 
@@ -26,6 +24,37 @@ export const userSlice = createSlice({
         logout() {
             localStorage.removeItem('user');
             return initialState;
+        },
+        changeInShoppingCart(state, {payload}: {payload: IProduct & IQuantity}) {
+            let isExist = false;
+            const shoppingCart = state.info.shoppingCart.map(product => {
+                if (product.id === payload.id) {
+                    if (payload.quantity < 1) {
+                        product.quantity = 1;
+                    } else {
+                        product.quantity = payload.quantity;
+                    }
+                    isExist = true;
+                }
+
+                return product;
+            });
+
+            if (!isExist) {
+                shoppingCart.push(payload);
+            }
+
+            localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+        },
+        removeFromShoppingCart(state, {payload}: {payload: IProduct & IQuantity}) {
+            const shoppingCart = state.info.shoppingCart.filter(product => product.id !== payload.id);
+            localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+        },
+        getShoppingCart(state) {
+            const data = localStorage.getItem('shoppingCart');
+            state.info.shoppingCart = data 
+                ? JSON.parse(localStorage.getItem('shoppingCart')!) 
+                : [] as (IProduct & IQuantity)[];
         }
     },
     extraReducers: builder => {
@@ -65,29 +94,11 @@ export const userSlice = createSlice({
 
 
 
-        builder.addCase(getShoppingCart.pending, (state) => {
-            state.errors = [] as IError[];
-            state.loading = true;
-        });
-        builder.addCase(getShoppingCart.fulfilled, (state, {payload}: {payload: IProduct[]}) => {
-            state.info.shoppingCart = payload;
-            state.loading = false;
-        });
-        builder.addCase(getShoppingCart.rejected, (state, action) => {
-            console.log(action)
-            const payload = action.payload as IRejectedResponse;
-            console.error(payload)
-            state.errors = payload.errors;
-            state.loading = false;
-        });
-
-
-
         builder.addCase(getPurchases.pending, (state) => {
             state.errors = [] as IError[];
             state.loading = true;
         });
-        builder.addCase(getPurchases.fulfilled, (state, {payload}: {payload: IProduct[]}) => {
+        builder.addCase(getPurchases.fulfilled, (state, {payload}: {payload: (IProduct & IQuantity)[]}) => {
             state.info.purchases = payload;
             state.loading = false;
         });
@@ -97,43 +108,9 @@ export const userSlice = createSlice({
             state.errors = payload.errors;
             state.loading = false;
         });
-
-
-
-        builder.addCase(addToShoppingCart.pending, (state, action) => {
-            state.errors = [] as IError[];
-            state.loading = true;
-        });
-        builder.addCase(addToShoppingCart.fulfilled, (state, {payload}: {payload: IProduct[]}) => {
-            state.info.shoppingCart = payload;
-            state.loading = false;
-        });
-        builder.addCase(addToShoppingCart.rejected, (state, action) => {
-            const payload = action.payload as IRejectedResponse;
-            console.error(payload)
-            state.errors = payload.errors;
-            state.loading = false;
-        });
-
-
-
-        builder.addCase(removeFromShoppingCartAndThenGet.pending, (state, action) => {
-            state.errors = [] as IError[];
-            state.loading = true;
-        });
-        builder.addCase(removeFromShoppingCartAndThenGet.fulfilled, (state, {payload}: {payload: IProduct[]}) => {
-            state.info.shoppingCart = payload;
-            state.loading = false;
-        });
-        builder.addCase(removeFromShoppingCartAndThenGet.rejected, (state, action) => {
-            const payload = action.payload as IRejectedResponse;
-            console.error(payload)
-            state.errors = payload.errors;
-            state.loading = false;
-        });
     }
 });
 
 
-export const {logout} = userSlice.actions;
+export const {logout, changeInShoppingCart, removeFromShoppingCart, getShoppingCart} = userSlice.actions;
 export default userSlice.reducer;

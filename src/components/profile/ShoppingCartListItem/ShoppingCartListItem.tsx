@@ -1,15 +1,19 @@
-import { MouseEvent } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
-import { noImageUrl } from "../../../config";
-import IProduct from "../../../models/IProduct";
-import { AppDispatch } from "../../../store/store";
-import styles from './ProductListItem.module.css';
+import { MouseEvent } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { noImageUrl } from '../../../config';
+import IProduct from '../../../models/IProduct';
+import IQuantity from '../../../models/IQuantity';
+import { removeFromShoppingCart } from '../../../store/slices/userSlice/userSlice';
+import { AppDispatch } from '../../../store/store';
+import styles from './ShoppingCartListItem.module.css';
 
+interface ShoppingCartListItemProps {
+    product: IProduct & IQuantity
+}
 
-const ProductListItem = ({product}: {product: IProduct}) => {
+const ShoppingCartListItem = ({product}: ShoppingCartListItemProps) => {
     const dispatch = useDispatch<AppDispatch>();
-    const {pathname} = useLocation();
 
     const removeFromCard = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -38,19 +42,13 @@ const ProductListItem = ({product}: {product: IProduct}) => {
                 </div>
                 <div className={styles.footer}>
                     <div className={styles.price}><span>{product.price}$</span></div>
-                    {pathname === '/profile/shoppingCart' &&
-                        <div onClick={removeFromCard} className={styles.removeFromCardBtn}>
-                            Remove from card
-                        </div>
-                    }
+                    <div onClick={removeFromCard} className={styles.removeFromCardBtn}>
+                        Remove from card
+                    </div>
                 </div>
             </div>
         </Link>
     );
 }
  
-export default ProductListItem;
-
-function removeFromShoppingCart(product: IProduct): any {
-    throw new Error("Function not implemented.");
-}
+export default ShoppingCartListItem;

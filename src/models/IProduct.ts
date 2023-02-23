@@ -6,7 +6,7 @@ export default interface IProduct {
     imageUrl?: string,
     weight?: number,
     height?: number,
-    isInShoopingCart: boolean,
+    isInShoppingCart: boolean,
     needs?: {
         water?: string,
         soil?: string,

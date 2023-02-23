@@ -20,7 +20,7 @@ export default createAsyncThunk(
                 });
             }
             const response = await getPurchasesRequest(user);
-
+            console.log('ok')
             return response.data;
         } catch (error: any) {
             return thunkApi.rejectWithValue(error.response.data);

@@ -1,0 +1,5 @@
+.list {
+    color: black;
+    display: flex;
+    flex-direction: column;
+}

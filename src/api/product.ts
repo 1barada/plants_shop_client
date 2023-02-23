@@ -4,9 +4,9 @@ import IProduct from "../models/IProduct";
 import ISearchInfo from "../models/ISearchInfo";
 import IUser from "../models/IUser";
 
-export const getAllProductsRequest = async () => {
+export const getAllProductsRequest = async (page: number) => {
     const response = await axios.get(
-        baseServerURL + '/product'
+        baseServerURL + '/product?page=' + page
     );
 
     return response;

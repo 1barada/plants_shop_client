@@ -5,11 +5,13 @@ import IRejectedResponse from "../../../models/IRejectedResponse";
 import fetchProducts from "./thunk/fetchProducts";
 import addProduct from "./thunk/addProduct";
 import seachProducts from "./thunk/searchProducts";
+import IGetPageResponse from "../../../models/IGetPageResponse";
 
 export type ProductsSliceType = ReturnType<typeof productSlice.reducer>;
 
 const initialState = {
     items: [] as IProduct[],
+    totalPages: 0,
     loading: false,
     errors: [] as IError[]
 };
@@ -25,17 +27,10 @@ const productSlice = createSlice({
             state.loading = true;
             state.errors = [];
         });
-        builder.addCase(fetchProducts.fulfilled, (state, action) => {
-            const {products, shoopingCartIds} = action.payload;
-            products.forEach(product => {
-                if (shoopingCartIds.includes(product.id)) {
-                    product.isInShoopingCart = true;
-                    shoopingCartIds.splice(shoopingCartIds.indexOf(product.id), 1);
-                } else {
-                    product.isInShoopingCart = false;
-                }
-            });
-            state.items = products;
+        builder.addCase(fetchProducts.fulfilled, (state, {payload}: {payload: IGetPageResponse}) => {
+            const {items, totalPages} = payload;
+            state.items = items;
+            state.totalPages = totalPages;
             state.loading = false;
         });
         builder.addCase(fetchProducts.rejected, (state, action) => {

@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { noImageUrl } from "../../../config";
 import IProduct from "../../../models/IProduct";
-import fetchProducts from "../../../store/slices/productSlice/thunk/fetchProducts";
-import addToShoppingCart from "../../../store/slices/userSlice/thunk/addToShoppingCart";
+import { changeInShoppingCart } from "../../../store/slices/userSlice/userSlice";
 import { AppDispatch } from "../../../store/store";
 import styles from './ProductGridItem.module.css';
 
@@ -14,7 +13,7 @@ const ProductGridItem = ({product}: {product: IProduct}) => {
     const addToCard = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
-        dispatch(addToShoppingCart(product)).then(e => dispatch(fetchProducts()));
+        dispatch(changeInShoppingCart({...product, quantity: 0}));
     }
 
     return (
@@ -37,7 +36,7 @@ const ProductGridItem = ({product}: {product: IProduct}) => {
             </div>
             <div className={styles.footer}>
                 <div className={styles.price}><span>{product.price}$</span></div>
-                {product.isInShoopingCart 
+                {product.isInShoppingCart 
                     ?   <h4 className={styles.isInCard}>already in cart</h4>
                     :   <div onClick={addToCard} className={styles.addToCardBtn}>Add to card</div>
                 }

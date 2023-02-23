@@ -9,8 +9,8 @@ import Loading from "../../commonComponents/Loading/Loading";
 import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
-    const [username, setUsername] = useState('user');
-    const [password, setPassword] = useState('user1234');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const dispatch = useDispatch<any>();
     const user = useSelector<RootState>(state => state.user) as UserSliceType;
@@ -29,7 +29,7 @@ const LoginForm = () => {
             case 'adminLogin': 
                 loginHandler({
                     username: 'admin',
-                    password: 'pZcGExSfMSJHUn5wHVWVmJfp'
+                    password: 'admin1234'
                 });
                 break;
         }
