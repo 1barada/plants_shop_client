@@ -1,2 +1,9 @@
 .profile__info {
 }
+
+.link {
+    margin: 0 20px;
+    color: rgb(61, 61, 61);
+    padding: 10px;
+    border-radius: 8px;
+}

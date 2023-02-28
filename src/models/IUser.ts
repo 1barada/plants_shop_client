@@ -1,5 +1,4 @@
-import IProduct from "./IProduct";
-import IQuantity from "./IQuantity";
+import IProductQuantity from "./IProductQuantity";
 
 export default interface IUser {
     name: string,
@@ -7,6 +6,6 @@ export default interface IUser {
     role: string,
     balance: number,
     imgUrl?: string,
-    purchases: (IProduct & IQuantity)[],
-	shoppingCart: (IProduct & IQuantity)[],
+    purchases: IProductQuantity[],
+	shoppingCart: IProductQuantity[],
 };

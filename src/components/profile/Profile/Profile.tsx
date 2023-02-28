@@ -1,20 +1,14 @@
-import { MouseEvent, useCallback, memo, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router';
-import IProduct from '../../../models/IProduct';
-import IQuantity from '../../../models/IQuantity';
-import getPurchases from '../../../store/slices/userSlice/thunk/getPurchases';
-import { getShoppingCart } from '../../../store/slices/userSlice/userSlice';
-import { AppDispatch, RootState } from '../../../store/store';
-import Loading from '../../commonComponents/Loading/Loading';
+import { MouseEvent, useCallback, memo } from 'react';
+import { Outlet, Route, useNavigate } from 'react-router';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
+import ProfileInfo from '../ProfileInfo/ProfileInfo';
 import ProfileMenuOption from '../ProfileMenuOption/ProfileMenuOption';
+import PurchasesList from '../PurchasesList/PurchasesList';
+import ShoppingCartList from '../ShoppingCartList/ShoppingCartList';
 import styles from './Profile.module.css';
 
 const Profile = () => {
     const navigate = useNavigate();
-    const loading = useSelector<RootState>(state => state.user.loading) as (IProduct & IQuantity)[];
-    const dispatch = useDispatch<AppDispatch>();
 
     const profileInfoMenuHandler = useCallback((e: MouseEvent<HTMLDivElement>) => {
         navigate('/profile/info');

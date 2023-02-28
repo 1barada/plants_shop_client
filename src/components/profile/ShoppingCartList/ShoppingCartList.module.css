@@ -3,3 +3,34 @@
     display: flex;
     flex-direction: column;
 }
+
+.empty-list {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.list__computation {
+    padding: 20px;
+    font-size: 30px;
+    flex: 0 0 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid var(--main-border-color);
+}
+
+.computation__total-cost > span {
+    color: #3EA54C;
+}
+
+.computation__purchase {
+    background-color: rgb(235, 240, 241);
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.computation__purchase:hover {
+    background-color: rgb(232, 239, 248);
+}

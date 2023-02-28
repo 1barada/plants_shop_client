@@ -2,6 +2,6 @@
     padding: 16px;
     color: black;
     display: grid;
-    grid-template: 1fr / repeat(auto-fit, minmax(200px, 1fr));
+    grid-template: 1fr / repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
 }

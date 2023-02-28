@@ -13,7 +13,10 @@ const ProductGridItem = ({product}: {product: IProduct}) => {
     const addToCard = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
-        dispatch(changeInShoppingCart({...product, quantity: 0}));
+        dispatch(changeInShoppingCart({
+            product,
+            quantity: 1
+        }));
     }
 
     return (

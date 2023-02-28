@@ -1,7 +1,7 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, FocusEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import ISearchInfo from '../../../models/ISearchInfo';
-import searchProducts from '../../../store/slices/productSlice/thunk/searchProducts';
+import { setSearchParams } from '../../../store/slices/productSlice/productSlice';
 import { AppDispatch } from '../../../store/store';
 import styles from './SearchProductForm.module.css';
 
@@ -12,51 +12,90 @@ const SearchProductForm = () => {
     const titleHandler = (e: ChangeEvent<HTMLInputElement>) => 
         setSearchInfo({...searchInfo, title: e.target.value});
     const minPriceHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value === '') {
-            e.target.value = '0';
-            return;
-        }
-        setSearchInfo({...searchInfo, minPrice: parseFloat(e.target.value)});
+        setSearchInfo({...searchInfo, minPrice: parseInt(e.target.value)});
     };
     const maxPriceHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value === '') {
-            e.target.value = '0';
-            return;
-        }
-        setSearchInfo({...searchInfo, maxPrice: parseFloat(e.target.value)});
-    }
+        setSearchInfo({...searchInfo, maxPrice: parseInt(e.target.value)});
+    };
     const minWeightHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value === '') {
-            e.target.value = '0';
-            return;
-        }
-        setSearchInfo({...searchInfo, minWeight: parseFloat(e.target.value)});
-    }
+        setSearchInfo({...searchInfo, minWeight: parseInt(e.target.value)});
+    };
     const maxWightHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value === '') {
-            e.target.value = '0';
-            return;
-        }
-        setSearchInfo({...searchInfo, maxWeight: parseFloat(e.target.value)});
-    }
+        setSearchInfo({...searchInfo, maxWeight: parseInt(e.target.value)});
+    };
     const minHeightHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value === '') {
-            e.target.value = '0';
-            return;
-        }
-        setSearchInfo({...searchInfo, minHeight: parseFloat(e.target.value)});
-    }
+        setSearchInfo({...searchInfo, minHeight: parseInt(e.target.value)});
+    };
     const maxHeightHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value === '') {
-            e.target.value = '0';
-            return;
-        }
-        setSearchInfo({...searchInfo, maxHeight: parseFloat(e.target.value)});
-    }
+        setSearchInfo({...searchInfo, maxHeight: parseInt(e.target.value)});
+    };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(searchProducts(searchInfo));
+        dispatch(setSearchParams(searchInfo));
+    };
+
+
+
+    const onBlurMinPriceHandler = (e: FocusEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setSearchInfo({...searchInfo, minPrice: parseInt(e.target.defaultValue)});
+            e.target.value = e.target.defaultValue;
+        }
+        else if (searchInfo.maxPrice && parseInt(e.target.value) > searchInfo.maxPrice) {
+            setSearchInfo({...searchInfo, minPrice: searchInfo.maxPrice});
+            e.target.value = searchInfo.maxPrice.toString();
+        }
+    };
+    const onBlurMaxPriceHandler = (e: FocusEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setSearchInfo({...searchInfo, maxPrice: parseInt(e.target.value)});
+            e.target.value = e.target.defaultValue;
+        }
+        else if (searchInfo.minPrice && parseInt(e.target.value) < searchInfo.minPrice) {
+            setSearchInfo({...searchInfo, maxPrice: searchInfo.minPrice});
+            e.target.value = searchInfo.minPrice.toString();
+        }
+    };
+    const onBlurMinWeightHandler = (e: FocusEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setSearchInfo({...searchInfo, minWeight: parseInt(e.target.value)});
+            e.target.value = e.target.defaultValue;
+        }
+        else if (searchInfo.maxWeight && parseInt(e.target.value) > searchInfo.maxWeight) {
+            setSearchInfo({...searchInfo, minWeight: searchInfo.maxWeight});
+            e.target.value = searchInfo.maxWeight.toString();
+        }
+    };
+    const onBlurMaxWeightHandler = (e: FocusEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setSearchInfo({...searchInfo, maxWeight: parseInt(e.target.value)});
+            e.target.value = e.target.defaultValue;
+        }
+        else if (searchInfo.minWeight && parseInt(e.target.value) < searchInfo.minWeight) {
+            setSearchInfo({...searchInfo, maxWeight: searchInfo.minWeight});
+            e.target.value = searchInfo.minWeight.toString();
+        }
+    };
+    const onBlurMinHeightHandler = (e: FocusEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setSearchInfo({...searchInfo, minHeight: parseInt(e.target.value)});
+            e.target.value = e.target.defaultValue;
+        }
+        else if (searchInfo.maxHeight && parseInt(e.target.value) > searchInfo.maxHeight) {
+            setSearchInfo({...searchInfo, minHeight: searchInfo.maxHeight});
+            e.target.value = searchInfo.maxHeight.toString();
+        }
+    };
+    const onBlurMaxHeightHandler = (e: FocusEvent<HTMLInputElement>) => {
+        if (e.target.value === '') {
+            setSearchInfo({...searchInfo, maxHeight: parseInt(e.target.value)});
+            e.target.value = e.target.defaultValue;
+        }
+        else if (searchInfo.minHeight && parseInt(e.target.value) < searchInfo.minHeight) {
+            setSearchInfo({...searchInfo, maxHeight: searchInfo.minHeight});
+            e.target.value = searchInfo.minHeight.toString();
+        }
     };
 
     return (
@@ -76,6 +115,7 @@ const SearchProductForm = () => {
                         min='0'
                         max='200'
                         defaultValue='0'
+                        onBlur={onBlurMinPriceHandler}
                         onChange={minPriceHandler}
                     />
                     <label htmlFor="search__price-max">max:</label> 
@@ -85,6 +125,7 @@ const SearchProductForm = () => {
                         min='0'
                         max='200'
                         defaultValue='200'
+                        onBlur={onBlurMaxPriceHandler}
                         onChange={maxPriceHandler}
                     />
                 </div>
@@ -99,6 +140,7 @@ const SearchProductForm = () => {
                         min='0'
                         max='200'
                         defaultValue='0'
+                        onBlur={onBlurMinWeightHandler}
                         onChange={minWeightHandler}
                     />
                     <label htmlFor="search__weight-max">max:</label> 
@@ -108,6 +150,7 @@ const SearchProductForm = () => {
                         min='0'
                         max='200'
                         defaultValue='200'
+                        onBlur={onBlurMaxPriceHandler}
                         onChange={maxWightHandler}
                     />
                 </div>
@@ -122,6 +165,7 @@ const SearchProductForm = () => {
                         min='0'
                         max='200'
                         defaultValue='0'
+                        onBlur={onBlurMinHeightHandler}
                         onChange={minHeightHandler}
                     />
                     <label htmlFor="search__height-max">max:</label> 
@@ -131,6 +175,7 @@ const SearchProductForm = () => {
                         min='0'
                         max='200'
                         defaultValue='200'
+                        onBlur={onBlurMaxHeightHandler}
                         onChange={maxHeightHandler}
                     />
                 </div>

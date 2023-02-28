@@ -54,7 +54,6 @@
     display: flex;
     align-items: center;
     padding: 0 10px;
-    gap: 40px;
 }
 
 .price {
@@ -83,4 +82,29 @@
 .removeFromCardBtn:hover {
     border: 0.2em solid rgba(206, 194, 203, 0.3);
     padding: 0.3em;
+}
+
+.item__controller {
+}
+
+.item__quantity {
+    padding: 10px 0;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.quantity__btn {
+    width: 25px;
+    height: 25px;
+    background-color: rgb(195, 195, 216);
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity__btn:hover {
+    background-color: rgb(178, 178, 203);
 }

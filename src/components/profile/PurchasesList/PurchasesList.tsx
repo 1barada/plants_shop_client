@@ -22,8 +22,8 @@ const PurchasesList = () => {
                 :   <ul className={styles.list}>
                         {!user.info.purchases || user.info.purchases.length === 0
                             ?   <h2>List is Empty</h2>
-                            :   user.info.purchases.map((product) => 
-                                    <PurchasesListItem key={product.id} product={product}/>  
+                            :   user.info.purchases.map((productQuantity) => 
+                                    <PurchasesListItem key={productQuantity.product.id} productQuantity={productQuantity}/> 
                                 )
                         }
                     </ul>

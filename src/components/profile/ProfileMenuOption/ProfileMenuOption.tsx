@@ -10,7 +10,7 @@ interface ProfileMenuOptionProps {
 
 const ProfileMenuOption = ({title, to, onClick}: ProfileMenuOptionProps) => {
     const {pathname} = useLocation();
-
+    
     return (
         <div
             className={styles.menu__option + ' ' + (to === pathname && styles['menu__option-selected'])} 

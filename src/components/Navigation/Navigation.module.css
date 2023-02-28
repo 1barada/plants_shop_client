@@ -8,3 +8,15 @@
 .link:hover {
     background-color: rgb(250, 250, 250);
 }
+
+.link__cart-count {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    width: 24px;
+    margin: 0 10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+}

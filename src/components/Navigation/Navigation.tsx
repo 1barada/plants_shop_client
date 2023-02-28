@@ -1,21 +1,18 @@
-import { memo, MouseEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { memo, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout, UserSliceType } from '../../store/slices/userSlice/userSlice';
+import { UserSliceType } from '../../store/slices/userSlice/userSlice';
+import truncateToTwoDecimal from '../../utils/truncateToTwoDecimal';
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
     const user = useSelector((state: any) => state.user) as UserSliceType;
-    const dispatch = useDispatch();
 
-    const logoutUser = () => {
-        dispatch(logout());
-    }
-
-    const handleClick = (e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {
-        e.preventDefault();
-        logoutUser();
-    }
+    const totalItems = useMemo<number>(() => {
+        return truncateToTwoDecimal(user.info.shoppingCart
+            .map(product => product.quantity)
+            .reduce((prev, curr) => {return prev + curr}, 0));
+    }, [user.info.shoppingCart]);
 
     return (
         <nav>
@@ -25,8 +22,10 @@ const Navigation = () => {
                             ?   <Link to="/admin" className={styles.link}>Admin</Link>
                             :   <></>
                         }
-                        <Link to="" onClick={handleClick} className={styles.link}>Logout</Link>
-                        <Link to="/shoppingcart" className={styles.link}>Shopping Cart</Link>
+                        <Link to="/profile/shoppingCart" className={styles.link + ' ' + styles['link__shopping-cart']}>
+                            Shopping Cart 
+                            {totalItems !== 0 && <span className={styles['link__cart-count']}>{totalItems}</span>}
+                        </Link>
                         <Link to="/profile" className={styles.link}>Profile</Link>
                     </>
                 :   <>
