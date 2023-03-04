@@ -10,6 +10,7 @@ import ProfilePage from './pages/ProfilePage';
 import ProfileInfo from './components/profile/ProfileInfo/ProfileInfo';
 import PurchasesList from './components/profile/PurchasesList/PurchasesList';
 import ShoppingCartList from './components/profile/ShoppingCartList/ShoppingCartList';
+import ProductPage from './pages/ProductPage';
 
 const App: React.FunctionComponent = () => {
     return (
@@ -18,6 +19,7 @@ const App: React.FunctionComponent = () => {
                 <Route index element={<HomePage/>}/>
                 <Route path='/login' element={<AuthPage/>}/>
                 <Route path='/register' element={<AuthPage/>}/>
+                <Route path='/product/:id' element={<ProductPage/>}/>
                 <Route path='/admin' element={
                     <RequireAuth>
                         <AdminPage/>

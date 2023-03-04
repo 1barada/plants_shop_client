@@ -6,17 +6,29 @@ import fetchProducts from "./thunk/fetchProducts";
 import addProduct from "./thunk/addProduct";
 import IGetPageResponse from "../../../models/IGetPageResponse";
 import ISearchInfo from "../../../models/ISearchInfo";
+import getOneProduct from "./thunk/getOneProduct";
 
 export type ProductsSliceType = ReturnType<typeof productSlice.reducer>;
 
+interface ProductSliceInitState {
+    item: IProduct,
+    items: IProduct[],
+    totalPages: number,
+    page: number,
+    searchParams: ISearchInfo,
+    loading: boolean,
+    errors: IError[]
+}
+
 const initialState = {
+    item: {},
     items: [] as IProduct[],
     totalPages: 0,
     page: 1,
-    searchParams: {} as ISearchInfo,
+    searchParams: {},
     loading: false,
     errors: [] as IError[]
-};
+} as ProductSliceInitState;
 
 const productSlice = createSlice({
     name: 'products',
@@ -44,6 +56,28 @@ const productSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(fetchProducts.rejected, (state, action) => {
+            const payload = action.payload as IRejectedResponse;
+            if (!payload) {
+                return console.error('empty rejected response!');
+            }
+            
+            console.error(payload);
+            state.errors = payload.errors;
+            state.loading = false;
+        });
+
+
+
+        builder.addCase(getOneProduct.pending, (state, action) => {
+            state.item = {} as IProduct;
+            state.loading = true;
+            state.errors = [];
+        });
+        builder.addCase(getOneProduct.fulfilled, (state, {payload}: {payload: IProduct}) => {
+            state.item = payload;
+            state.loading = false;
+        });
+        builder.addCase(getOneProduct.rejected, (state, action) => {
             const payload = action.payload as IRejectedResponse;
             if (!payload) {
                 return console.error('empty rejected response!');

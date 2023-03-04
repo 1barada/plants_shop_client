@@ -1,5 +1,12 @@
-.link {
+.nav {
+    display: flex;
+}
+
+.nav > * {
     margin: 0 20px;
+}
+
+.link {
     color: rgb(61, 61, 61);
     padding: 10px;
     border-radius: 8px;
@@ -7,6 +14,11 @@
 
 .link:hover {
     background-color: rgb(250, 250, 250);
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
 }
 
 .link__cart-count {

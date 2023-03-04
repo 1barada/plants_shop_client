@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { UserSliceType } from '../../store/slices/userSlice/userSlice';
 import truncateToTwoDecimal from '../../utils/truncateToTwoDecimal';
+import ProfileAvatar from '../profile/ProfileAvatar/ProfileAvatar';
 import styles from './Navigation.module.css';
 
 const Navigation = () => {
@@ -15,7 +16,7 @@ const Navigation = () => {
     }, [user.info.shoppingCart]);
 
     return (
-        <nav>
+        <nav className={styles.nav}>
             {user.authorized 
                 ?   <>
                         {user.info.role === 'admin' 
@@ -26,7 +27,9 @@ const Navigation = () => {
                             Shopping Cart 
                             {totalItems !== 0 && <span className={styles['link__cart-count']}>{totalItems}</span>}
                         </Link>
-                        <Link to="/profile" className={styles.link}>Profile</Link>
+                        <Link to="/profile" className={styles.avatar}>
+                            <ProfileAvatar size={40}/>
+                        </Link>
                     </>
                 :   <>
                         <Link to="/login" className={styles.link}>Login</Link>

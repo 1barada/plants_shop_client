@@ -24,10 +24,23 @@
     background-position-y: -40px;
     grid-column: span 2;
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     justify-content: center;
     align-items: center;
     padding: 15px;
     border-bottom: 2px solid var(--main-border-color);
+}
+
+.profile__balance {
+    background-color: rgb(245, 245, 245);
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid var(--main-border-color);
+}
+
+.balance {
+    color: var(--money-color);
 }
 
 .profile__avatar > img {

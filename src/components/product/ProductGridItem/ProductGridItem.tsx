@@ -20,7 +20,7 @@ const ProductGridItem = ({product}: {product: IProduct}) => {
     }
 
     return (
-        <Link to='' className={styles.item}>
+        <Link to={`/product/${product.id}`} className={styles.item}>
             <div className={styles.icon}>
                 <img
                     src={product.imageUrl ? product.imageUrl : ''}

@@ -39,7 +39,7 @@ const ShoppingCartListItem = ({productQuantity}: ShoppingCartListItemProps) => {
     }
 
     return (
-        <Link to='' className={styles.item}>
+        <Link to={`/product/${productQuantity.product.id}`} className={styles.item}>
             <div className={styles.icon}>
                 <img
                     src={productQuantity.product.imageUrl || ''}

@@ -1,22 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
+import IProductQuantity from "../models/IProductQuantity";
 import rootReducer from './rootReducer';
 import { initialState as userInitialState, UserSliceType } from "./slices/userSlice/userSlice";
 
 const userText = localStorage.getItem('user');
-const userData = userText ? JSON.parse(userText) : userInitialState;
+const userData = userText ? JSON.parse(userText) as UserSliceType : userInitialState;
 
 const shoppingCartText = localStorage.getItem('shoppingCart');
-const shoppingCartData = shoppingCartText ? JSON.parse(shoppingCartText) : userInitialState.info.shoppingCart;
+const shoppingCartData = shoppingCartText ? JSON.parse(shoppingCartText) as IProductQuantity[] : userInitialState.info.shoppingCart;
+
+const preloadedData = {...userData, info: {...userData.info, shoppingCart: shoppingCartData}}
 
 const store = configureStore({
     preloadedState: {
-        user: {
-            ...userData,
-            info: {
-                ...userData.info,
-                shoppingCart: shoppingCartData
-            }
-        } as UserSliceType
+        user: preloadedData
     },
     reducer: rootReducer
 });

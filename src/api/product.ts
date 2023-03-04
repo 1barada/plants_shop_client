@@ -18,6 +18,16 @@ export const getProductsRequest = async (page: number, searchParams?: ISearchInf
     return response;
 };
 
+export const getProductByIdRequest = async (id: string) => {
+    let urlReq = baseServerURL + '/product/' + id;
+
+    const response = await axios.get(
+        urlReq
+    );
+
+    return response;
+};
+
 export const createProductRequest = async (product: IProduct, user: IUser) => {
     const response = await axios.post(
         baseServerURL + '/product',

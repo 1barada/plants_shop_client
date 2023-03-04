@@ -1,0 +1,138 @@
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.item {
+    display: grid;
+    grid-template: 500px 1fr / 3fr 4fr;
+    gap: 20px;
+}
+
+.icon {
+}
+
+.icon > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.body {
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.body * h3, .body > h3 { 
+    font-weight: 200;
+}
+
+.title {
+    line-height: 1.1;
+    border-bottom: 2px solid var(--main-border-color);
+    padding-bottom: 20px;
+}
+
+.needs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 2px solid var(--main-border-color);
+    padding-bottom: 20px;
+}
+
+.needs__item {
+    padding-left: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.needs__item-title {
+    flex: 0 0 56px;
+    font-weight: 200;
+}
+
+.needs__item-base {
+    flex: 0 1 170px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    margin-left: 10px;
+}
+
+.needs-empty {
+    background-color: grey;
+}
+
+.needs-low {
+    background-color: rgba(186, 242, 167, 0.1);
+}
+
+.needs-middle {
+    background-color: rgba(255, 255, 142, 0.1);
+}
+
+.needs-high {
+    background-color: rgba(255, 202, 151, 0.1);
+}
+
+.computation {
+    border-radius: 15px;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.computation__quantity {
+    display: flex;
+    gap: 20px;
+}
+
+.total-cost > span {
+    color: #3EA54C;
+}
+
+.quantity__btn {
+    user-select: none;
+    width: 25px;
+    height: 25px;
+    background-color: rgb(195, 195, 216);
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity__btn:hover {
+    background-color: rgb(178, 178, 203);
+}
+
+.addToCardBtn {
+    box-sizing: border-box;
+    user-select: none;
+    padding: 0.5em;
+    border-radius: var(--static6);
+    background-color: rgb(245, 245, 245);
+    cursor: pointer;
+}
+
+.addToCardBtn:hover {
+    border: 0.2em solid rgba(206, 194, 203, 0.3);
+    padding: 0.3em;
+}
+
+.footer {
+}
+
+.description-title {
+    font-weight: bold;
+    border-bottom: 2px solid var(--main-border-color);
+    padding-bottom: 4px;
+    margin-bottom: 15px;
+}

@@ -25,11 +25,14 @@
 
 .search input {
     width: 100%;
+    border-radius: 5px;
+    border: 2px solid var(--main-border-color);
 }
 
 .search__input_range > div {
     padding: 10px;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(250, 250, 250);
+    border-radius: 5px;
 }
 
 .search__submit {

@@ -7,9 +7,9 @@ export default interface IProduct {
     weight?: number,
     height?: number,
     isInShoppingCart: boolean,
-    needs?: {
-        water?: string,
-        soil?: string,
-        sun?: string
+    needs: {
+        water: string,
+        soil: string,
+        sun: string
     }
 };

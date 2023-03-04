@@ -26,6 +26,7 @@ export const userSlice = createSlice({
     reducers: {
         logout() {
             localStorage.removeItem('user');
+            localStorage.removeItem('shoppingCart');
             return initialState;
         },
         changeInShoppingCart(state, {payload}: {payload: IProductQuantity}) {
@@ -57,7 +58,7 @@ export const userSlice = createSlice({
             state.loading = true;
         });
         builder.addCase(login.fulfilled, (state, {payload}: {payload: IUser}) => {
-            state.info = payload;
+            state.info = {...state.info, ...payload};
             state.authorized = true;
             state.loading = false;
             localStorage.setItem('user', JSON.stringify(state));
