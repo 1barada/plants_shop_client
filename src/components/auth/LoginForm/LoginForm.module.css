@@ -67,7 +67,7 @@
 .login__or::before, .login__or::after {
     content: "";
     flex: 0 1 100%;
-    border-bottom: 1px solid var(--main-color);
+    border-bottom: 1px solid var(--main-border-color);
     margin: 0 10px;
 }
 

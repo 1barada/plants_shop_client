@@ -7,6 +7,7 @@ import getPurchases from "./thunk/getPurchases";
 import login from "./thunk/login";
 import register from "./thunk/register";
 import purchase from "./thunk/purchase";
+import profileInfo from "./thunk/profileInfo";
 
 export type UserSliceType = ReturnType<typeof userSlice.reducer>;
 
@@ -89,6 +90,24 @@ export const userSlice = createSlice({
 
 
 
+        builder.addCase(profileInfo.pending, (state) => {
+            state.errors = [] as IError[];
+            state.loading = true;
+        });
+        builder.addCase(profileInfo.fulfilled, (state, {payload}: {payload: IUser}) => {
+            state.info = {...state.info, ...payload};
+            state.loading = false;
+            localStorage.setItem('user', JSON.stringify(state));
+        });
+        builder.addCase(profileInfo.rejected, (state, action) => {
+            const payload = action.payload as IRejectedResponse;
+            console.error(payload)
+            state.errors = payload.errors;
+            state.loading = false;
+        });
+
+
+
         builder.addCase(getPurchases.pending, (state) => {
             state.errors = [] as IError[];
             state.loading = true;
@@ -110,10 +129,12 @@ export const userSlice = createSlice({
             state.errors = [] as IError[];
             state.loading = true;
         });
-        builder.addCase(purchase.fulfilled, (state, {payload}: {payload: IProductQuantity[]}) => {
+        builder.addCase(purchase.fulfilled, (state, {payload}: {payload: IUser}) => {
             state.info.shoppingCart = [];
-            localStorage.removeItem('shoppingCart');
+            state.info.balance = payload.balance;
             state.loading = false;
+            localStorage.setItem('user', JSON.stringify(state));
+            localStorage.removeItem('shoppingCart');
         });
         builder.addCase(purchase.rejected, (state, action) => {
             const payload = action.payload as IRejectedResponse;

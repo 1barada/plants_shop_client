@@ -7,6 +7,7 @@ import addProduct from "./thunk/addProduct";
 import IGetPageResponse from "../../../models/IGetPageResponse";
 import ISearchInfo from "../../../models/ISearchInfo";
 import getOneProduct from "./thunk/getOneProduct";
+import IMaxValues from "../../../models/IMaxValues";
 
 export type ProductsSliceType = ReturnType<typeof productSlice.reducer>;
 
@@ -17,7 +18,8 @@ interface ProductSliceInitState {
     page: number,
     searchParams: ISearchInfo,
     loading: boolean,
-    errors: IError[]
+    errors: IError[],
+    maxValues: IMaxValues
 }
 
 const initialState = {
@@ -27,7 +29,12 @@ const initialState = {
     page: 1,
     searchParams: {},
     loading: false,
-    errors: [] as IError[]
+    errors: [] as IError[],
+    maxValues: {
+        maxPrice: 0,
+        maxWeight: 0,
+        maxHeight: 0
+    }
 } as ProductSliceInitState;
 
 const productSlice = createSlice({
@@ -49,7 +56,8 @@ const productSlice = createSlice({
             state.errors = [];
         });
         builder.addCase(fetchProducts.fulfilled, (state, {payload}: {payload: IGetPageResponse}) => {
-            const {items, totalPages, page} = payload;
+            const {items, totalPages, page, maxValues} = payload;
+            state.maxValues = maxValues;
             state.items = items;
             state.totalPages = totalPages;
             state.page = page;

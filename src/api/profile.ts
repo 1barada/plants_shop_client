@@ -3,6 +3,19 @@ import { baseServerURL } from "../config";
 import IPurchaseRequest from "../models/IPurchaseRequest";
 import IUser from "../models/IUser";
 
+export const profileInfoRequest = async (user: IUser) => {
+    const response = await axios.get(
+        baseServerURL + '/profile',
+        {
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            }
+        }
+    );
+
+    return response;
+}
+
 export const getPurchasesRequest = async (user: IUser) => {
     const response = await axios.get(
         baseServerURL + '/profile/purchases',

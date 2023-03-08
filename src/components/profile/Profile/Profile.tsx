@@ -1,14 +1,20 @@
-import { MouseEvent, useCallback, memo } from 'react';
-import { useSelector } from 'react-redux';
+import { MouseEvent, useCallback, memo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router';
-import { RootState } from '../../../store/store';
+import profileInfo from '../../../store/slices/userSlice/thunk/profileInfo';
+import { AppDispatch, RootState } from '../../../store/store';
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar';
 import ProfileMenuOption from '../ProfileMenuOption/ProfileMenuOption';
 import styles from './Profile.module.css';
 
 const Profile = () => {
     const balance = useSelector<RootState>(state => state.user.info.balance) as number;
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(profileInfo())
+    }, []);
 
     const profileInfoMenuHandler = useCallback((e: MouseEvent<HTMLDivElement>) => {
         navigate('/profile/info');
