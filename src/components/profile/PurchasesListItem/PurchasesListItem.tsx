@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { noImageUrl } from '../../../config';
+import { baseServerURL, noImageUrl } from '../../../config';
 import IProductQuantity from '../../../models/IProductQuantity';
 import styles from './PurchasesListItem.module.css';
 
@@ -12,7 +12,7 @@ const PurchasesListItem = ({productQuantity}: PurchasesListItemProps) => {
         <Link to={`/product/${productQuantity.product.id}`} className={styles.item}>
             <div className={styles.icon}>
                 <img
-                    src={productQuantity.product.imageUrl || ''}
+                    src={productQuantity.product.imgUrl ? baseServerURL + productQuantity.product.imgUrl : ''}
                     alt={'Product'}
                     onError={({currentTarget}) => {
                         currentTarget.src = noImageUrl;

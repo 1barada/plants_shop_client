@@ -105,6 +105,7 @@ const productSlice = createSlice({
         builder.addCase(addProduct.fulfilled, (state, action) => {
             state.items.push(action.payload);
             state.loading = false;
+            alert('product successfully added');
         });
         builder.addCase(addProduct.rejected, (state, action) => {
             const payload = action.payload as IRejectedResponse;

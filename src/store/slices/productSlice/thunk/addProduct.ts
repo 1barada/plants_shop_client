@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createProductRequest } from "../../../../api/product";
 import IError from "../../../../models/IError";
-import IProduct from "../../../../models/IProduct";
+import IProductForm from "../../../../models/IProductForm";
 import IUser from "../../../../models/IUser";
 
 export default createAsyncThunk(
     'products/addProductsStatus/',
-    async (product: IProduct, thunkApi) => {
+    async (product: IProductForm, thunkApi) => {
         try {
             const user = (thunkApi.getState() as any).user.info as IUser;
             if (!user.token) {

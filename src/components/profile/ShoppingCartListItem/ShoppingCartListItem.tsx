@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { noImageUrl } from '../../../config';
+import { baseServerURL, noImageUrl } from '../../../config';
 import IProductQuantity from '../../../models/IProductQuantity';
 import { changeInShoppingCart, removeFromShoppingCart } from '../../../store/slices/userSlice/userSlice';
 import { AppDispatch } from '../../../store/store';
@@ -42,7 +42,7 @@ const ShoppingCartListItem = ({productQuantity}: ShoppingCartListItemProps) => {
         <Link to={`/product/${productQuantity.product.id}`} className={styles.item}>
             <div className={styles.icon}>
                 <img
-                    src={productQuantity.product.imageUrl || ''}
+                    src={productQuantity.product.imgUrl ? baseServerURL + productQuantity.product.imgUrl : ''}
                     alt={'Product'}
                     onError={({currentTarget}) => {
                         currentTarget.src = noImageUrl;
@@ -66,7 +66,7 @@ const ShoppingCartListItem = ({productQuantity}: ShoppingCartListItemProps) => {
                             <div onClick={incrementProductQuantity} className={styles.quantity__btn}>+</div>
                         </div>
                         <div onClick={removeFromCard} className={styles.removeFromCardBtn}>
-                            Remove from card
+                            Remove from cart
                         </div>
                     </div>
                 </div>

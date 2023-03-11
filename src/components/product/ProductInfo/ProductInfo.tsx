@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { noImageUrl } from '../../../config';
+import { baseServerURL, noImageUrl } from '../../../config';
 import { ProductsSliceType } from '../../../store/slices/productSlice/productSlice';
 import getOneProduct from '../../../store/slices/productSlice/thunk/getOneProduct';
 import { changeInShoppingCart } from '../../../store/slices/userSlice/userSlice';
@@ -57,7 +57,7 @@ const ProductInfo = () => {
                             :<div className={styles.item}>
                                 <div className={styles.icon}>
                                     <img
-                                        src={item.imageUrl ? item.imageUrl : ''}
+                                        src={item.imgUrl ? baseServerURL + item.imgUrl : ''}
                                         alt={'Product'}
                                         onError={({currentTarget}) => {
                                             currentTarget.src = noImageUrl;

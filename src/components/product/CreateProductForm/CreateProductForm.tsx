@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import IError from "../../../models/IError";
-import IProduct from "../../../models/IProduct";
+import IProductForm from "../../../models/IProductForm";
 import { ProductsSliceType } from "../../../store/slices/productSlice/productSlice";
 import addProduct from "../../../store/slices/productSlice/thunk/addProduct";
 import { AppDispatch } from "../../../store/store";
@@ -12,7 +12,7 @@ const CreateProductForm = () => {
         title: '',
         description: '',
         price: 10.00,
-        imageUrl: '',
+        img: null,
         weight: 10,
         height: 10,
         needs: {
@@ -20,21 +20,17 @@ const CreateProductForm = () => {
             soil: 'low',
             sun: 'low',
         }
-    } as IProduct);
+    } as IProductForm);
 
     const dispatch = useDispatch<AppDispatch>();
-    const {errors} = useSelector((state: any) => state.products) as ProductsSliceType;
-
-    const newProduct = () => {
-        dispatch(addProduct(product));
-    };
+    const {errors, loading} = useSelector((state: any) => state.products) as ProductsSliceType;
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        newProduct();
+        dispatch(addProduct(product));
     };
 
-    const uploadImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const imageHandler = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files ? e.target.files[0] : null;
         if (!file) 
             return;
@@ -43,9 +39,10 @@ const CreateProductForm = () => {
         const fileExtantion = fileName[fileName.length - 1];
 
         if (fileExtantion === 'jpg' || fileExtantion === 'jpeg' || fileExtantion === 'png') {
-            setProduct({...product, imageUrl: ''});
+            setProduct({...product, img: file});
         }
         else {
+            e.target.files = null;
         }
     }
 
@@ -74,7 +71,7 @@ const CreateProductForm = () => {
 
                 <label htmlFor='image'>image</label>
                 <input 
-                    onChange={uploadImageHandler} 
+                    onChange={imageHandler} 
                     id='image' 
                     name='price' 
                     type='file' 
@@ -135,15 +132,14 @@ const CreateProductForm = () => {
                         </select>
                     </li>
                 </ul>
-
-                <input type='submit' value='add product'/>
+                {errors.length === 0
+                    ?   <></>
+                    :   errors.map((error: IError) => 
+                            <h2 key={error.message} className='error'>{error.message}</h2>
+                        )
+                }
+                <input type='submit' value='add product' disabled={loading}/>
             </form>
-            {errors.length === 0
-                ?   <></>
-                :   errors.map((error: IError) => 
-                        <h2 key={error.message} className='error'>{error.message}</h2>
-                    )
-            }
         </div>
     );
 }

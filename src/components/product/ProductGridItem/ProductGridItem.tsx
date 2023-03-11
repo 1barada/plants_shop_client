@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { noImageUrl } from "../../../config";
+import { baseServerURL, noImageUrl } from "../../../config";
 import IProduct from "../../../models/IProduct";
 import { changeInShoppingCart } from "../../../store/slices/userSlice/userSlice";
 import { AppDispatch } from "../../../store/store";
@@ -18,12 +18,12 @@ const ProductGridItem = ({product}: {product: IProduct}) => {
             quantity: 1
         }));
     }
-
+    
     return (
         <Link to={`/product/${product.id}`} className={styles.item}>
             <div className={styles.icon}>
                 <img
-                    src={product.imageUrl ? product.imageUrl : ''}
+                    src={product.imgUrl ? baseServerURL + product.imgUrl : ''}
                     alt={'Product'}
                     onError={({currentTarget}) => {
                         currentTarget.src = noImageUrl;

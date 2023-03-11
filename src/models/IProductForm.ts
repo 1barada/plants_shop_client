@@ -1,15 +1,13 @@
-export default interface IProduct {
-    id: string,
+export default interface IProductForm {
     title: string,
     description: string,
     price: number,
-    imgUrl?: string,
+    img?: Blob | null,
     weight?: number,
     height?: number,
-    isInShoppingCart: boolean,
     needs: {
         water: string,
         soil: string,
         sun: string
     }
-};
+}
