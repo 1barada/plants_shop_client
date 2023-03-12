@@ -62,7 +62,11 @@ export const userSlice = createSlice({
             state.info = {...state.info, ...payload};
             state.authorized = true;
             state.loading = false;
-            localStorage.setItem('user', JSON.stringify(state));
+            const user = {...state} as any;
+            delete user.info.purchases;
+            delete user.errors;
+            delete user.loading;
+            localStorage.setItem('user', JSON.stringify(user));
         });
         builder.addCase(login.rejected, (state, action) => {
             const payload = action.payload as IRejectedResponse;
@@ -113,6 +117,7 @@ export const userSlice = createSlice({
             state.loading = true;
         });
         builder.addCase(getPurchases.fulfilled, (state, {payload}: {payload: IProductQuantity[]}) => {
+            console.log(payload)
             state.info.purchases = payload;
             state.loading = false;
         });

@@ -4,7 +4,7 @@ import rootReducer from './rootReducer';
 import { initialState as userInitialState, UserSliceType } from "./slices/userSlice/userSlice";
 
 const userText = localStorage.getItem('user');
-const userData = userText ? JSON.parse(userText) as UserSliceType : userInitialState;
+const userData = {...userInitialState, ...(userText ? JSON.parse(userText) as UserSliceType : userInitialState)};
 
 const shoppingCartText = localStorage.getItem('shoppingCart');
 const shoppingCartData = shoppingCartText ? JSON.parse(shoppingCartText) as IProductQuantity[] : userInitialState.info.shoppingCart;
