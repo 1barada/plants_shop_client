@@ -42,7 +42,7 @@ const ShoppingCartListItem = ({productQuantity}: ShoppingCartListItemProps) => {
         <Link to={`/product/${productQuantity.product.id}`} className={styles.item}>
             <div className={styles.icon}>
                 <img
-                    src={productQuantity.product.imgUrl ? baseServerURL + productQuantity.product.imgUrl : ''}
+                    src={productQuantity.product.imgUrl ? productQuantity.product.imgUrl : noImageUrl}
                     alt={'Product'}
                     onError={({currentTarget}) => {
                         currentTarget.src = noImageUrl;

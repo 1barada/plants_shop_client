@@ -23,7 +23,7 @@ const ProductGridItem = ({product}: {product: IProduct}) => {
         <Link to={`/product/${product.id}`} className={styles.item}>
             <div className={styles.icon}>
                 <img
-                    src={product.imgUrl ? baseServerURL + product.imgUrl : ''}
+                    src={product.imgUrl ? product.imgUrl : noImageUrl}
                     alt={'Product'}
                     onError={({currentTarget}) => {
                         currentTarget.src = noImageUrl;

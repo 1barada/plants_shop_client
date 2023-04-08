@@ -57,7 +57,7 @@ const ProductInfo = () => {
                             :<div className={styles.item}>
                                 <div className={styles.icon}>
                                     <img
-                                        src={item.imgUrl ? baseServerURL + item.imgUrl : ''}
+                                        src={item.imgUrl ? item.imgUrl : noImageUrl}
                                         alt={'Product'}
                                         onError={({currentTarget}) => {
                                             currentTarget.src = noImageUrl;

@@ -8,17 +8,24 @@ import Loading from '../../commonComponents/Loading/Loading';
 import SearchProductForm from '../SearchProduct/SearchProductForm';
 import ProductsGrid from '../ProductGrid/ProductsGrid';
 import { Pagination } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ProductsCatalog: FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const products = useSelector<RootState>(state => state.products) as ProductsSliceType;
-
+    const params = useParams();
+    const navigate = useNavigate();
+    
     useEffect(() => {
-        dispatch(fetchProducts({page: 1, searchParams: products.searchParams}));
+        const page = parseInt(params.page || '0');
+        if (page < 1) {
+            navigate('/1', {replace: true});
+        } else {
+            dispatch(fetchProducts({page: page, searchParams: products.searchParams}));
+        }
     }, [dispatch, products.searchParams]);
 
     const paginationHandler = (e: ChangeEvent<unknown>, newPage: number) => {
-        console.log(newPage)
         dispatch(fetchProducts({page: newPage, searchParams: products.searchParams}))
     };
 

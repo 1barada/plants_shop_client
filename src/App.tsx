@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Routes, Route } from 'react-router';
+import { Routes, Route, Navigate } from 'react-router';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import Layout from './pages/Layout';
@@ -16,7 +16,8 @@ const App: React.FunctionComponent = () => {
     return (
         <Routes>
             <Route path='/' element={<Layout/>}>
-                <Route index element={<HomePage/>}/>
+                <Route index element={<Navigate to='/1'/>}/>
+                <Route path='/:page' element={<HomePage/>}/>
                 <Route path='/login' element={<AuthPage/>}/>
                 <Route path='/register' element={<AuthPage/>}/>
                 <Route path='/product/:id' element={<ProductPage/>}/>

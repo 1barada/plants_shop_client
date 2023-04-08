@@ -10,7 +10,7 @@ const RequireAuth = ({children}: RequireAuthProps) => {
 
     if (!isAuthorized) {
         return (
-            <Navigate to='/'/>
+            <Navigate to='/1'/>
         );
     }
 

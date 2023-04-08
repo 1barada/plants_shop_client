@@ -12,7 +12,7 @@ const AuthForm = () => {
     return (
         <div className={styles.auth}>
             {isAuthorized
-                ?   <Navigate to='/'/> 
+                ?   <Navigate to='/1'/> 
                 :   <>
                         <img className={styles.auth__image} src={authPageImgUrl} alt=""/>
                         {pathname === '/login' 
